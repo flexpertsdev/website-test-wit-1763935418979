@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Daily Grind</title>
+    <meta name="description" content="Your local coffee shop, serving the best coffee in town.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>☕</text></svg>">
+
+    <style>
+        /* CSS Reset */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background-color: #f8f8f8;
+            color: #333;
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+
+        /* General Styles */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        section {
+            padding: 60px 0;
+        }
+
+        h1, h2 {
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #222;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 3rem;
+        }
+
+        h2 {
+            font-size: 2.2rem;
+        }
+
+        p {
+            margin-bottom: 20px;
+        }
+
+        a {
+            color: #c69963;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Navigation */
+        nav {
+            background-color: #fff;
+            padding: 15px 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 20px;
+        }
+
+        nav ul li a {
+            display: block;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            background-color: #f0f0f0;
+            text-decoration: none;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #333;
+        }
+
+        /* Hero Section */
+        #hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1497935586351-b67a49e012bf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80');
+            background-size: cover;
+            background-position: center;
+            color: #fff;
+            text-align: center;
+            padding: 150px 0;
+            position: relative;
+            overflow: hidden; /* Clip overflow for animation */
+        }
+
+        #hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.2); /* Subtle overlay */
+        }
+
+        #hero .container {
+            position: relative; /* Place content above the overlay */
+            z-index: 1;
+        }
+
+        #hero h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        #hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            color: #eee;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #c69963;
+            color: #fff;
+            padding: 12px 25px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #a8783c;
+            text-decoration: none;
+        }
+
+        /* About Section */
+        #about {
+            background-color: #fff;
+        }
+
+        #about .container {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        #about img {
+            max-width: 50%;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        #about .about-content {
+            flex: 1;
+        }
+
+        /* Menu Section */
+        #menu {
+            background-color: #f2f2f2;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .menu-item {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .menu-item h3 {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .menu-item p {
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .menu-item span {
+            font-weight: 600;
+            color: #c69963;
+        }
+
+        /* Contact Section */
+        #contact {
+            background-color: #fff;
+        }
+
+        #contact .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .contact-info {
+            padding: 20px;
+        }
+
+        .contact-info h3 {
+            font-size: 1.6rem;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .contact-info p {
+            margin-bottom: 10px;
+            color: #555;
+        }
+
+        .contact-form {
+            padding: 20px;
+        }
+
+        .contact-form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #444;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: inherit;
+        }
+
+        .contact-form textarea {
+            resize: vertical;
+        }
+
+        .contact-form button {
+            background-color: #c69963;
+            color: #fff;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-size: inherit;
+            font-family: inherit;
+        }
+
+        .contact-form button:hover {
+            background-color: #a8783c;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        /* Mobile Styles */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            nav .container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            nav ul {
+                margin-top: 10px;
+                flex-direction: column;
+            }
+
+            nav ul li {
+                margin-left: 0;
+                margin-bottom: 10px;
+            }
+
+            #hero {
+                padding: 100px 0;
+            }
+
+            #about .container {
+                flex-direction: column;
+            }
+
+            #about img {
+                max-width: 100%;
+            }
+        }
+
+        /* Animations */
+        .fade-in {
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .slide-in-left {
+            animation: slideInLeft 1s ease-out;
+        }
+
+        @keyframes slideInLeft {
+            from {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .slide-in-right {
+            animation: slideInRight 1s ease-out;
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        /* Utilities */
+        .text-center {
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="container">
+            <a href="#" class="logo">The Daily Grind</a>
+            <ul>
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#menu">Menu</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header id="hero">
+        <div class="container">
+            <h1 class="fade-in">Start Your Day Right</h1>
+            <p class="fade-in">The best coffee in town, made with love.</p>
+            <a href="#menu" class="btn fade-in">View Menu</a>
+        </div>
+    </header>
+
+    <section id="about">
+        <div class="container">
+            <img src="https://images.unsplash.com/photo-1517433087805-5bc96a694983?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Coffee Shop Interior" class="slide-in-left">
+            <div class="about-content slide-in-right">
+                <h2>About Us</h2>
+                <p>We are a local coffee shop dedicated to serving the highest quality coffee and creating a warm and inviting atmosphere for our community. Our beans are ethically sourced and roasted in-house to ensure freshness and flavor.</p>
+                <p>We believe that coffee is more than just a drink; it's a ritual, a conversation starter, and a source of comfort. Come visit us and experience the difference.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="menu">
+        <div class="container">
+            <h2 class="text-center">Our Menu</h2>
+            <div class="menu-grid">
+                <div class="menu-item fade-in">
+                    <h3>Espresso</h3>
+                    <p>A concentrated coffee beverage brewed by forcing hot water through finely-ground coffee beans.</p>
+                    <span>$3.00</span>
+                </div>
+                <div class="menu-item fade-in">
+                    <h3>Latte</h3>
+                    <p>Espresso with steamed milk and a thin layer of foam.</p>
+                    <span>$4.00</span>
+                </div>
+                <div class="menu-item fade-in">
+                    <h3>Cappuccino</h3>
+                    <p>Espresso with steamed milk and a thick layer of foamed milk.</p>
+                    <span>$4.50</span>
+                </div>
+                <div class="menu-item fade-in">
+                    <h3>Iced Coffee</h3>
+                    <p>Freshly brewed coffee served over ice.</p>
+                    <span>$3.50</span>
+                </div>
+                <div class="menu-item fade-in">
+                    <h3>Mocha</h3>
+                    <p>Espresso with chocolate syrup, steamed milk, and whipped cream.</p>
+                    <span>$5.00</span>
+                </div>
+                <div class="menu-item fade-in">
+                    <h3>Americano</h3>
+                    <p>Espresso diluted with hot water.</p>
+                    <span>$3.00</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <div class="contact-info slide-in-left">
+                <h3>Visit Us</h3>
+                <p>123 Main Street<br>Anytown, USA 12345</p>
+                <p><strong>Phone:</strong> (555) 123-4567</p>
+                <p><strong>Email:</strong> info@thedailygrind.com</p>
+            </div>
+            <div class="contact-form slide-in-right">
+                <h3>Contact Us</h3>
+                <form id="contactForm">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+
+                    <label for="message">Message:</label>
+                    <textarea id="message" name="message" rows="4" required></textarea>
+
+                    <button type="submit">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2023 The Daily Grind. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            // Basic form validation (expand for more robust validation)
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+
+            if (!name || !email || !message) {
+                alert('Please fill out all fields.');
+                return;
+            }
+
+            // Simulate form submission (replace with actual API call)
+            alert('Form submitted successfully! (Simulated)');
+            document.getElementById('contactForm').reset();
+        });
+    </script>
+
+</body>
+</html>
